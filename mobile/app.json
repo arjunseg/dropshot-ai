@@ -1,0 +1,63 @@
+{
+  "expo": {
+    "name": "DropShot AI",
+    "slug": "dropshot-ai",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "dropshot",
+    "userInterfaceStyle": "dark",
+    "splash": {
+      "image": "./assets/images/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0A0E1A"
+    },
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "app.dropshot.ai",
+      "infoPlist": {
+        "NSCameraUsageDescription": "DropShot AI uses your camera to record pickleball shots for analysis.",
+        "NSMicrophoneUsageDescription": "Microphone access is required for video recording.",
+        "NSPhotoLibraryUsageDescription": "DropShot AI needs access to your photo library to select videos for analysis."
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/icon.png",
+        "backgroundColor": "#0A0E1A"
+      },
+      "package": "app.dropshot.ai",
+      "permissions": [
+        "CAMERA",
+        "RECORD_AUDIO",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE"
+      ]
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static",
+      "favicon": "./assets/images/icon.png"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-camera",
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/images/icon.png",
+          "color": "#00C853"
+        }
+      ],
+      [
+        "@stripe/stripe-react-native",
+        {
+          "publishableKey": "EXPO_PUBLIC_STRIPE_PUBLISHABLE_KEY"
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}

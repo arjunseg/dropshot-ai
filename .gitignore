@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+dist/
+.env
+*.env
+
+# Node / Expo
+node_modules/
+.expo/
+dist/
+build/
+.metro-health-check*
+ios/
+android/
+
+# ML models (large binary files — pull with download_models.py)
+backend/models/*.pt
+ml/data/raw/
+ml/data/processed/
+ml/models/
+
+# Storage
+*.mp4
+*.mov
+
+# Misc
+.DS_Store
+*.log
+coverage/
+.coverage
+htmlcov/

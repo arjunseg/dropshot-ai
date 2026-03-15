@@ -1,0 +1,33 @@
+FROM python:3.11-slim AS builder
+
+# Install system deps for OpenCV and MediaPipe
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libgl1-mesa-glx \
+    libglib2.0-0 \
+    libsm6 \
+    libxext6 \
+    libxrender-dev \
+    libgomp1 \
+    ffmpeg \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+RUN pip install poetry==1.8.3
+
+ENV POETRY_VIRTUALENVS_CREATE=false \
+    POETRY_NO_INTERACTION=1
+
+COPY pyproject.toml poetry.lock* ./
+RUN poetry install --no-root --without dev 2>/dev/null || \
+    pip install fastapi sqlalchemy asyncpg psycopg2-binary alembic \
+    redis celery boto3 anthropic passlib python-jose \
+    opencv-python-headless mediapipe ultralytics numpy scipy \
+    exponent-server-sdk
+
+COPY . .
+
+# Create directory for model weights
+RUN mkdir -p /app/models
+
+CMD ["celery", "-A", "app.pipeline.tasks", "worker", "--loglevel=info", "--concurrency=2", "-Q", "video_analysis"]

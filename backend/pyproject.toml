@@ -1,0 +1,61 @@
+[tool.poetry]
+name = "dropshot-ai-backend"
+version = "0.1.0"
+description = "DropShot AI — Pickleball video coaching backend"
+authors = ["DropShot AI Team"]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.115.0"
+uvicorn = {extras = ["standard"], version = "^0.30.0"}
+pydantic = {extras = ["email"], version = "^2.7.0"}
+pydantic-settings = "^2.3.0"
+sqlalchemy = {extras = ["asyncio"], version = "^2.0.30"}
+asyncpg = "^0.29.0"
+alembic = "^1.13.1"
+redis = {extras = ["hiredis"], version = "^5.0.4"}
+celery = {extras = ["redis"], version = "^5.4.0"}
+boto3 = "^1.34.0"
+anthropic = "^0.30.0"
+stripe = "^10.0.0"
+passlib = {extras = ["bcrypt"], version = "^1.7.4"}
+python-jose = {extras = ["cryptography"], version = "^3.3.0"}
+python-multipart = "^0.0.9"
+httpx = "^0.27.0"
+exponent-server-sdk = "^2.1.0"
+
+# Pipeline dependencies
+opencv-python-headless = "^4.10.0"
+mediapipe = "^0.10.14"
+ultralytics = "^8.2.0"
+numpy = "^1.26.0"
+scipy = "^1.13.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.2.0"
+pytest-asyncio = "^0.23.0"
+pytest-cov = "^5.0.0"
+httpx = "^0.27.0"
+ruff = "^0.4.0"
+mypy = "^1.10.0"
+factory-boy = "^3.3.0"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "UP", "B"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
